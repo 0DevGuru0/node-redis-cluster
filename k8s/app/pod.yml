@@ -20,7 +20,7 @@ spec:
      - name: REDIS_CLUSTER_HOST
        value: redis-cluster-service
      - name: REDIS_CLUSTER_PORT
-       value: 6379
+       value: '6379'
     #  - name: REDIS_CLUSTER_HOST
     #    valueFrom:
     #     configMapKeyRef:
@@ -31,8 +31,3 @@ spec:
     #     configMapKeyRef:
     #      key: redisConfig
     #      name: port
-    ports:
-     - name: redis-app
-       port: 8080
-       containerPort: 8080
-       protocol: TCP

@@ -44,3 +44,4 @@ kubectl apply -f $pvsFolder/
 
 
 watch kubectl get all -o wide
+
