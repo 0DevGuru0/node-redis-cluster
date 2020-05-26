@@ -1,0 +1,8 @@
+sudo: required
+services:
+  - docker
+before_install:
+ - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+ - docker build -t afsan007/node-redis .
+script:
+ - docker push afsan007/node-redis

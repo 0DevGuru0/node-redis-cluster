@@ -1,0 +1,39 @@
+var Redis = require('ioredis')
+
+let cluster = new Redis.Cluster(
+	[
+		{
+			host: 'redis-cluster',
+			port: 6379,
+		},
+	]
+	// {
+	// 	natMap: {
+	// 		// 		// '172.17.0.2:7001': {
+	// 		// 		// 	host: '192.168.33.10',
+	// 		// 		// 	port: 7000,
+	// 		// 		// },
+	// 		// 		// '172.17.0.3:7002': {
+	// 		// 		// 	host: '192.168.33.10',
+	// 		// 		// 	port: 7002,
+	// 		// 		// },
+
+	// 		'192.168.33.10:7000': {
+	// 			host: '172.17.0.5',
+	// 			port: 6379,
+	// 		},
+	// 		'192.168.33.10:7002': {
+	// 			host: '172.17.0.4',
+	// 			port: 6379,
+	// 		},
+	// 	},
+	// }
+)
+// cluster
+// 	.connect(() => console.log('redis cluster connected'))
+// 	.catch(console.log)
+// console.log(cluster)
+cluster.set('foo', 'bar') // This query will be sent to one of the masters.
+cluster.get('foo', function (err, res) {
+	console.log(err, res)
+})
