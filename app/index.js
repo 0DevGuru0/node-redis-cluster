@@ -6,12 +6,10 @@ let cluster = new Redis.Cluster([
 		port: process.env.REDIS_CLUSTER_PORT,
 	},
 ])
-
-cluster.connect(() =>
-	console.log('redis cluster connected')
-)
-
-cluster.set('foo', 'bar')
+console.log(cluster.info())
+for (let i = 0; i < 1000; i++) {
+	cluster.set('foo' + i, 'bar' + i)
+}
 cluster.get('foo', function (err, res) {
-	console.log(err, res)
+	console.log(res)
 })
