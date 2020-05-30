@@ -1,15 +1,28 @@
-var Redis = require('ioredis')
+console.clear()
+require('dotenv').config()
 
-let cluster = new Redis.Cluster([
-	{
-		host: process.env.REDIS_CLUSTER_HOST,
-		port: process.env.REDIS_CLUSTER_PORT,
-	},
-])
-console.log(cluster.info())
-for (let i = 0; i < 1000; i++) {
-	cluster.set('foo' + i, 'bar' + i)
+const redis =
+	process.env.MODE === 'production'
+		? require('./redis/redisCluster')
+		: require('./redis/redis')
+
+for (let i = 0; i < 17; i++) {
+	redis.set('ali' + i, 'ok' + i)
 }
-cluster.get('foo', function (err, res) {
-	console.log(res)
+
+redis.monitor(function (err, monitor) {
+	monitor.on('monitor', function (time, args, source) {
+		console.log(time, args, source)
+	})
 })
+
+// var stream = redis.scanStream({
+// 	match: 'ali*',
+// 	count: 1,
+// })
+
+// stream.on('data', resultKeys => console.log(resultKeys))
+// stream.on('end', () =>
+// 	console.log('all keys have been visited')
+// )
+// ///////////////////////////////////////////////////////////

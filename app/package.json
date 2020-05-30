@@ -4,9 +4,12 @@
 	"main": "index.js",
 	"license": "MIT",
 	"scripts": {
-		"start": "node index"
+		"start": "node index",
+		"start:dev": "nodemon index"
 	},
 	"dependencies": {
+		"chalk": "^4.0.0",
+		"dotenv": "^8.2.0",
 		"ioredis": "^4.16.3"
 	}
 }

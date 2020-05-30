@@ -14,7 +14,7 @@ spec:
     name: node-app
     resources:
      limits:
-      memory: '128Mi'
+      memory: '500Mi'
       cpu: '25m'
     env:
      - name: REDIS_CLUSTER_HOST
